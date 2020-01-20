@@ -40,10 +40,30 @@ export const testSmsConnection = data => {
       data
     })
   };
+
+// 获取系统配置
+export const getSysSetting = data => {
+  return axios({ 
+    url: '/ucs/setting/getSysSetting',
+    method: 'post',
+    data
+  })
+};
+// 修改系统配置
+export const updateSysSetting = data => {
+  return axios({ 
+    url: '/ucs/setting/updateSysSetting',
+    method: 'post',
+    data
+  })
+};
+
 export default {
     testPhoneConnection,
     testFaxConnection,
     testConferenceConnection,
-    testSmsConnection
+    testSmsConnection,
+    getSysSetting,
+    updateSysSetting
 
 }

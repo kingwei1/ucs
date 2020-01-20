@@ -1,20 +1,7 @@
 <template>
 <div id="dialogBox">
-	<!--添加号码对话框-->
-	<el-dialog v-if="flag=='添加号码'" :title="flag" :visible.sync="dialogVisible" width="500px" :before-close="handleClose">
-		<el-input type="textarea" resize="none" :autosize="{minRows:4,maxRows:4}"  placeholder="请输入号码，多个号码使用“，”隔开"></el-input>
-		<el-button @click='handleClose'>取 消</el-button>
-		<el-button type="primary" >确 定</el-button>
-	</el-dialog>
 	
-	<!--电话通话过程对话框-->
-	<el-dialog v-if="flag=='通话中' || flag=='来电呼叫' || flag=='已挂断'" :title="flag" :visible.sync="dialogVisible" width="500px" :before-close="handleClose">
-		<el-input type="textarea" resize="none" :autosize="{minRows:4,maxRows:4}"  placeholder="请输入号码，多个号码使用“，”隔开"></el-input>
-		<el-button @click='handleClose'>取 消</el-button>
-		<el-button type="primary" >确 定</el-button>
-	</el-dialog>
-	
-	<!--电话通话过程对话框-->
+	<!--登录-->
 	<el-dialog v-if="flag=='登录'" :title="flag" :visible.sync="dialogVisible" width="500px" :before-close="handleClose" center :close-on-click-modal='false'>
 		<el-form :model="ruleForm"  ref="ruleForm" label-width="auto" class="demo-ruleForm">
 		  <el-form-item label="用户" prop="userName" :rules="[{ required: true, message: '用户账号不能为空'}]" >
@@ -30,9 +17,30 @@
 		<span slot="footer" class="dialog-footer">
 		  <el-button @click='handleClose'>取 消</el-button>
 		  <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
-		</span>
-		
+		</span>		
 	</el-dialog>
+	
+	<!--修改系统配置-->
+	<el-dialog v-if="flag=='系统配置修改'" :title="flag" :visible.sync="dialogVisible" width="600px" :before-close="handleClose" :close-on-click-modal='false'>
+		<el-form  label-width="auto" class="demo-ruleForm">
+		  <el-form-item :label="dialogData.describe" >
+		    <el-input  v-model="dialogData.originValue" placeholder="" v-if="dialogData.type == 'text'"></el-input>
+			<el-select v-model="dialogData.originValue" placeholder="请选择" v-if="dialogData.type == 'select'">
+			    <el-option
+			      v-for="(item,index) in dialogData.value"
+			      :key="item.key"
+			      :label="item.value"
+			      :value="item.key">
+			    </el-option>
+		    </el-select>
+		  </el-form-item>
+		</el-form>
+		<span slot="footer" class="dialog-footer">
+		  <el-button @click='handleClose'>取 消</el-button>
+		  <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
+		</span>		
+	</el-dialog>
+	
 </div>
 </template>
 
@@ -42,13 +50,13 @@
 		components: {
 
 		},
-		props: ['flag', 'dialogVisible', 'datas'],
+		props: ['flag', 'dialogVisible', 'dialogData'],
 		data() {
 			return {
                ruleForm: {
                  userName: "wangyong",
                  passwrod:"888888",
-				 path:'http://172.25.193.102/ucc_server'
+				 path:'http://172.25.193.102'
                },
 			}
 		},
