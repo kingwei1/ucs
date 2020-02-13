@@ -45,7 +45,7 @@ export const testSmsConnection = data => {
 export const getSysSetting = data => {
   return axios({ 
     url: '/ucs/setting/getSysSetting',
-    method: 'post',
+    method: 'get',
     data
   })
 };
@@ -57,6 +57,30 @@ export const updateSysSetting = data => {
     data
   })
 };
+// 获取心跳配置
+export const taskList = data => {
+  return axios({ 
+    url: '/ucs/task/taskList',
+    method: 'get',
+    data
+  })
+};
+// 修改心跳配置状态
+export const taskControl = data => {
+  return axios({ 
+    url: '/ucs/task/taskControl',
+    method: 'post',
+    data
+  })
+};
+// 获取当前运行的心跳配置
+export const running = data => {
+  return axios({ 
+    url: '/ucs/task/running',
+    method: 'get',
+    data
+  })
+};
 
 export default {
     testPhoneConnection,
@@ -64,6 +88,9 @@ export default {
     testConferenceConnection,
     testSmsConnection,
     getSysSetting,
-    updateSysSetting
+    updateSysSetting,
+	taskList,
+	taskControl,
+	running
 
 }

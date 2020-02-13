@@ -7,6 +7,10 @@
 		<div v-if="flag == 'system'">
 			<el-button type="primary" size="small" plain  @click="edit(scope.row)">修改配置</el-button>
 		</div>
+		
+		<div v-if="flag == 'heartBeat'">
+			<el-button type="primary" size="small" plain  @click="edit(scope.row)">修改状态</el-button>
+		</div>
     </template>
   </el-table-column>
 </el-table>
@@ -25,9 +29,9 @@ export default {
       return 'background:	rgb(230, 230, 230);color:rgb(96, 98, 102)';
     },
     cellStyle(row, column, rowIndex, columnIndex) {
-      if (row.column.className == 'status' && row.row.status == '成功') {
+      if (row.column.className == 'status' && (row.row.status == '成功' || row.row.status == '正在运行')) {
         return 'color:rgba(16,217,176,1)'
-      } else if (row.column.className == 'status' && row.row.status == '失败') {
+      } else if (row.column.className == 'status' && (row.row.status == '失败' || row.row.status == '已停止')) {
         return 'color:rgba(255,147,117,1)'
       }
     },

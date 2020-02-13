@@ -27,17 +27,17 @@
 		    <el-input  v-model="dialogData.originValue" placeholder="" v-if="dialogData.type == 'text'"></el-input>
 			<el-select v-model="dialogData.originValue" placeholder="请选择" v-if="dialogData.type == 'select'">
 			    <el-option
-			      v-for="(item,index) in dialogData.value"
-			      :key="item.key"
-			      :label="item.value"
-			      :value="item.key">
+			      v-for="(item,index) in dialogData.options"
+			      :key="item.value"
+			      :label="item.label"
+			      :value="item.value">
 			    </el-option>
 		    </el-select>
 		  </el-form-item>
 		</el-form>
 		<span slot="footer" class="dialog-footer">
 		  <el-button @click='handleClose'>取 消</el-button>
-		  <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
+		  <el-button type="primary" @click="alterSystem(dialogData.id,dialogData.originValue)">确 定</el-button>
 		</span>		
 	</el-dialog>
 	
@@ -65,7 +65,11 @@
 				this.$emit('close');
 			},
 			submit(obj){
+				console.log(obj);
 				this.$emit('submit');
+			},
+			alterSystem(id,obj){
+				this.$emit('alterSystem',id,obj);
 			},
 			submitForm(formName) {
 			  this.$refs[formName].validate((valid) => {
